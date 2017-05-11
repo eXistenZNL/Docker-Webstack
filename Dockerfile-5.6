@@ -1,15 +1,15 @@
-FROM alpine:latest
+FROM alpine:3.5
 
 MAINTAINER docker@stefan-van-essen.nl
 
 RUN apk -U upgrade && apk add \
     curl \
     nginx \
-    php7 \
-    php7-fpm \
+    php5 \
+    php5-fpm \
     && rm -rf /var/cache/apk/*
 
-COPY files/s6-overlay files/general files/php7 /
+COPY files/s6-overlay files/general files/php5 /
 
 WORKDIR /www
 

@@ -7,14 +7,9 @@ RUN apk -U upgrade && apk add \
     nginx \
     php7 \
     php7-fpm \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /etc/nginx/conf.d \
-    && rm -rf /etc/php7/php-fpm.d
+    && rm -rf /var/cache/apk/*
 
-ADD https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz /tmp/
-RUN gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C /
-
-COPY files /
+COPY files/s6-overlay files/general files/php7 /
 
 WORKDIR /www
 
