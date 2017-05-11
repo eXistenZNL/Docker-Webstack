@@ -14,7 +14,7 @@ RUN apk -U upgrade && apk add \
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz /tmp/
 RUN gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C /
 
-COPY basefiles /
+COPY files /
 
 WORKDIR /www
 
