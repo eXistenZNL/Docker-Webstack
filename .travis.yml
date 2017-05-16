@@ -1,0 +1,17 @@
+services:
+  - docker
+
+install:
+  - make install
+
+script:
+  - make
+  - make run
+  - sleep 15 # Wait for the docker health check to complete
+  - make test
+
+after_success:
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then
+    docker login -u="existenz" -p="$DOCKER_PASSWORD";
+    docker push existenz/webstack;
+    fi

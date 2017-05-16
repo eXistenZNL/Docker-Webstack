@@ -1,13 +1,15 @@
-.PHONY: build up clean
+.PHONY: install build run stop clean test
 
 build:
-	test -d files/s6-overlay || mkdir files/s6-overlay
-	test -f files/s6-overlay/init || wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz
-	test -f files/s6-overlay/init || gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C files/s6-overlay
-	rm -f s6-overlay-amd64.tar.gz
 	docker build -t existenz/webstack:5.6 -f Dockerfile-5.6 .
 	docker build -t existenz/webstack:7.0 -f Dockerfile-7.0 .
 	docker build -t existenz/webstack:7.1 -f Dockerfile-7.1 .
+
+install:
+	rm -rf files/s6-overlay
+	mkdir files/s6-overlay
+	wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz
+	gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C files/s6-overlay
 
 run:
 	docker run -d -p 8056:80 --name existenz_webstack_56 existenz/webstack:5.6
