@@ -7,7 +7,10 @@ RUN apk -U upgrade && apk add \
     nginx \
     php5 \
     php5-fpm \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && addgroup -S php \
+    && adduser -S -G php php
+
 
 COPY files/s6-overlay files/general files/php5 /
 
