@@ -1,9 +1,13 @@
 .PHONY: install build run stop clean test
 
+# Variables
+PWD := $(dir $(MAKEPATH))
+PROJECTNAME=existenz/webstack
+TAGNAME=UNDEF
+
 build:
-	docker build -t existenz/webstack:5.6 -f Dockerfile-5.6 .
-	docker build -t existenz/webstack:7.0 -f Dockerfile-7.0 .
-	docker build -t existenz/webstack:7.1 -f Dockerfile-7.1 .
+	if [ "$(TAGNAME)" = "UNDEF" ]; then echo "please provide a valid TAGNAME" && exit 1; fi
+	docker build -t $(PROJECTNAME):$(TAGNAME) -f Dockerfile-$(TAGNAME) --pull .
 
 install:
 	rm -rf files/s6-overlay
@@ -12,25 +16,19 @@ install:
 	gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C files/s6-overlay
 
 run:
-	docker run -d -p 8056:80 --name existenz_webstack_56 existenz/webstack:5.6
-	docker run -d -p 8070:80 --name existenz_webstack_70 existenz/webstack:7.0
-	docker run -d -p 8071:80 --name existenz_webstack_71 existenz/webstack:7.1
+	if [ "$(TAGNAME)" = "UNDEF" ]; then echo "please provide a valid TAGNAME" && exit 1; fi
+	docker run -d -p 8080:80 --name existenz_webstack_instance $(PROJECTNAME):$(TAGNAME)
 
 stop:
-	docker stop -t0 existenz_webstack_56
-	docker stop -t0 existenz_webstack_70
-	docker stop -t0 existenz_webstack_71
-	docker rm existenz_webstack_56
-	docker rm existenz_webstack_70
-	docker rm existenz_webstack_71
+	docker stop -t0 existenz_webstack_instance
+	docker rm existenz_webstack_instance
 
 clean:
+	if [ "$(TAGNAME)" = "UNDEF" ]; then echo "please provide a valid TAGNAME" && exit 1; fi
 	rm -rf files/s6-overlay
-	docker rmi existenz/webstack:5.6
-	docker rmi existenz/webstack:7.0
-	docker rmi existenz/webstack:7.1
+	docker rmi $(PROJECTNAME):$(TAGNAME)
 
 test:
-	docker ps | grep webstack_56 | grep -q "(healthy)"
-	docker ps | grep webstack_70 | grep -q "(healthy)"
-	docker ps | grep webstack_71 | grep -q "(healthy)"
+	docker ps | grep existenz_webstack_instance | grep -q "(healthy)"
+	docker exec -t existenz_webstack_instance php --version
+	

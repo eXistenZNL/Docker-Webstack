@@ -1,3 +1,9 @@
+matrix:
+  include:
+    - env: PHP_VERSION=5.6
+    - env: PHP_VERSION=7.0
+    - env: PHP_VERSION=7.1
+
 services:
   - docker
 
@@ -5,8 +11,8 @@ install:
   - make install
 
 script:
-  - make
-  - make run
+  - make TAGNAME=$(printenv PHP_VERSION)
+  - make run TAGNAME=$(printenv PHP_VERSION)
   - sleep 15 # Wait for the docker health check to complete
   - make test
 
