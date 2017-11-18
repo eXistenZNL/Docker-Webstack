@@ -1,9 +1,9 @@
 .PHONY: install build run stop clean test
 
 build:
-	docker build -t existenz/webstack:5.6 -f Dockerfile-5.6 .
-	docker build -t existenz/webstack:7.0 -f Dockerfile-7.0 .
-	docker build -t existenz/webstack:7.1 -f Dockerfile-7.1 .
+	docker build -t existenz/webstack:5.6 -f Dockerfile-5.6 --pull .
+	docker build -t existenz/webstack:7.0 -f Dockerfile-7.0 --pull .
+	docker build -t existenz/webstack:7.1 -f Dockerfile-7.1 --pull .
 
 install:
 	rm -rf files/s6-overlay
