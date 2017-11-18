@@ -2,9 +2,11 @@ FROM alpine:3.5
 
 MAINTAINER docker@stefan-van-essen.nl
 
-RUN apk -U upgrade && apk add \
+RUN apk -U upgrade && apk add --no-cache \
     curl \
+    libc6-compat \
     nginx \
+    php5-cli \
     php5-fpm \
     tzdata \
     && addgroup -S php \
