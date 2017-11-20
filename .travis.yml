@@ -1,14 +1,21 @@
+matrix:
+  include:
+    - env: PHP_VERSION=5.6
+    - env: PHP_VERSION=7.0
+    - env: PHP_VERSION=7.1
+
 services:
   - docker
 
-install:
-  - make install
+cache:
+  directories:
+    - files/s6-overlay
 
 script:
-  - make
-  - make run
+  - make build TAGNAME=$(printenv PHP_VERSION)
+  - make run TAGNAME=$(printenv PHP_VERSION)
   - sleep 15 # Wait for the docker health check to complete
-  - make test
+  - make test TAGNAME=$(printenv PHP_VERSION)
 
 after_success:
   - if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then

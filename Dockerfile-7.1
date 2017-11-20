@@ -2,11 +2,12 @@ FROM alpine:3.6
 
 MAINTAINER docker@stefan-van-essen.nl
 
-RUN apk -U upgrade && apk add \
+RUN apk -U upgrade && apk add --no-cache \
     curl \
     nginx \
     php7-fpm \
     tzdata \
+    && ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm \
     && addgroup -S php \
     && adduser -S -G php php \
     && rm -rf /var/cache/apk/* /etc/nginx/conf.d/* /etc/php7/conf.d/* /etc/php7/php-fpm.d/*

@@ -2,7 +2,7 @@ FROM alpine:3.5
 
 MAINTAINER docker@stefan-van-essen.nl
 
-RUN apk -U upgrade && apk add \
+RUN apk -U upgrade && apk add --no-cache \
     curl \
     nginx \
     php5-fpm \
