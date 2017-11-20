@@ -30,4 +30,4 @@ test:
 	if [ "$(TAGNAME)" = "UNDEF" ]; then echo "please provide a valid TAGNAME" && exit 1; fi
 	docker ps | grep existenz_webstack_instance | grep -q "(healthy)"
 	docker exec -t existenz_webstack_instance php-fpm --version | grep -q "PHP $(TAGNAME)"
-	
+	wget -q localhost:8080 -O- | grep -q "PHP Version $(TAGNAME)"
