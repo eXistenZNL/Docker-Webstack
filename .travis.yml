@@ -7,11 +7,12 @@ matrix:
 services:
   - docker
 
-install:
-  - make install
+cache:
+  directories:
+    - files/s6-overlay
 
 script:
-  - make TAGNAME=$(printenv PHP_VERSION)
+  - make build TAGNAME=$(printenv PHP_VERSION)
   - make run TAGNAME=$(printenv PHP_VERSION)
   - sleep 15 # Wait for the docker health check to complete
   - make test TAGNAME=$(printenv PHP_VERSION)

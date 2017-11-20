@@ -2,18 +2,16 @@
 
 # Variables
 PWD := $(dir $(MAKEPATH))
+S6TAG=v1.21.2.1
 PROJECTNAME=existenz/webstack
 TAGNAME=UNDEF
 
 build:
 	if [ "$(TAGNAME)" = "UNDEF" ]; then echo "please provide a valid TAGNAME" && exit 1; fi
+	test -d files/s6-overlay || mkdir -p files/s6-overlay
+	test -d files/s6-overlay || wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/$(S6TAG)/s6-overlay-amd64.tar.gz
+	test -d files/s6-overlay || gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C files/s6-overlay
 	docker build -t $(PROJECTNAME):$(TAGNAME) -f Dockerfile-$(TAGNAME) --pull .
-
-install:
-	rm -rf files/s6-overlay
-	mkdir files/s6-overlay
-	wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz
-	gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C files/s6-overlay
 
 run:
 	if [ "$(TAGNAME)" = "UNDEF" ]; then echo "please provide a valid TAGNAME" && exit 1; fi
