@@ -7,7 +7,7 @@ RUN apk -U upgrade && apk add --no-cache \
     nginx \
     php7-fpm \
     tzdata \
-    && ln -s /usr/bin/php-fpm7 /usr/bin/php-fpm \
+    && ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm \
     && addgroup -S php \
     && adduser -S -G php php \
     && rm -rf /var/cache/apk/* /etc/nginx/conf.d/* /etc/php7/conf.d/* /etc/php7/php-fpm.d/*
