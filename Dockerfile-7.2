@@ -2,10 +2,14 @@ FROM alpine:3.7
 
 MAINTAINER docker@stefan-van-essen.nl
 
+ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+RUN apk --update add ca-certificates
+RUN echo "@php https://php.codecasts.rocks/v3.7/php-7.2" >> /etc/apk/repositories
+
 RUN apk -U upgrade && apk add --no-cache \
     curl \
     nginx \
-    php7-fpm \
+    php7-fpm@php \
     tzdata \
     && ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm \
     && addgroup -S php \

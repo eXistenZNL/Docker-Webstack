@@ -51,6 +51,9 @@ RUN chown -R php:nginx /www \
 ```
 And you should now have a working container that runs your PHP project!
 
+> Please note that when using the PHP 7.2 container, add `@php` to the end of te packages names that you want to install.
+> This installs the PHP packages from the [the Codecasts repo](https://github.com/codecasts/php-alpine), since PHP 7.2 is not yet available from the official Alpine repositories.
+
 ### Overriding or extending the configuration
 
 If you want to augment of replace the configuration of Nginx, PHP or FPM, there are multiple options:
