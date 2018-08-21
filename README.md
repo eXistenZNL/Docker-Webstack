@@ -51,8 +51,14 @@ RUN chown -R php:nginx /www \
 ```
 And you should now have a working container that runs your PHP project!
 
-> Please note that when using the PHP 7.2 container, add `@php` to the end of te packages names that you want to install.
-> This installs the PHP packages from the [the Codecasts repo](https://github.com/codecasts/php-alpine), since PHP 7.2 is not yet available from the official Alpine repositories.
+### Versions
+
+The webstack comes in various versions, both with PHP from the Alpine repo and [the Codecasts repo](https://github.com/codecasts/php-alpine).
+By making use of the codecasts repo, we can get the latest and greatest PHP versions before they are added to the Alpine repo.
+
+However, this works both ways: while Codecasts has the latest PHP versions, they only support the two latest minor PHP versions, so at some point you will need to switch from the codecasts container to the vanilla container.
+
+> Please note that when using the codecasts containers, add `@php` to the end of the PHP package names that you want to install, so they are pulled from the Codecasts repo.
 
 ### Overriding or extending the configuration
 
