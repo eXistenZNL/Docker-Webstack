@@ -6,6 +6,8 @@ matrix:
     - env: TAG=7.2
     - env: TAG=7.2-codecasts
     - env: TAG=7.3-codecasts
+  allow_failures:
+    - env: TAG=7.3-codecasts
 
 services:
   - docker
