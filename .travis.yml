@@ -27,3 +27,13 @@ after_success:
     docker login -u="existenz" -p="$DOCKER_PASSWORD";
     docker push existenz/webstack;
     fi
+
+notifications:
+  webhooks:
+    urls:
+      - https://$HOOKR_AUTH@hookr.enrise.com/webhook-proxy/travis
+    on_success: always
+    on_failure: always
+    on_start: always
+    on_cancel: always
+    on_error: always
