@@ -6,8 +6,6 @@ matrix:
     - env: TAG=7.2
     - env: TAG=7.2-codecasts
     - env: TAG=7.3-codecasts
-  allow_failures:
-    - env: TAG=7.3-codecasts
 
 services:
   - docker
@@ -31,7 +29,7 @@ after_success:
 notifications:
   webhooks:
     urls:
-      - https://$HOOKR_AUTH@hookr.enrise.com/webhook-proxy/travis
+      - secure: "YjbuPvfJwW5r+uhvN5b+E5/QWo/wmv5OUpvCt07pqZw0ccZwxxNxsQmBW2jx+yA0vDZkHRS0hG4sYJmkGG7zdfWx0w64VDfykueE92ow7DCugIpRGWeXKaQyo9Yv0F0/2gwEzwOIje/rArZ9WORhmZ61hKkHkfbog/FchG5j5rLt7tf0+60xQ2dXZko21ytb8eR/YE3UN8iGOVhEkYxrCWaW54IDYDXq1o475YBDMOgPjrCglttazR2sLAPVGgXC1/wT+H0F5kex7zIX3SdTlSnjH2QgqwB6DTFDVMcfC6LOJjxra9Dl1HnuPY0nBplYDo1xqZr+X9jMRyaHqlMHYnlifxfLrqHT0o/DNcxpGYQ/hUXbzt/b5JGuk4YForwfoEROqmprcpFdLkDNluEX+f8qQVf1dVVckK9zBL7d3NY5Y3cee4EpjylUj9sxaFlfCPypFvi2syFdmuN3WgPvHZmws9FxuxkIwduElfRfDN3g4NXEHPzcL8HYIx9lKZ5lrx5xUsAk2bTvZC404bNcL7Igacfm3n945W7+QN+Bni61zItkKshc6Si7ra0J2J862SZtJbb1a8HG+QpNmw162YNnvH3cUABhq2IQeUq5eKepQVzYzuIkrgWE+hZ++Lnv2N8W1sAyU8SKeQ3HC8+peAjvlz0xmtCMIXhH89UZpqQ="
     on_success: always
     on_failure: always
     on_start: always
