@@ -1,15 +1,15 @@
-FROM alpine:3.8
+FROM alpine:3.9
 
 MAINTAINER docker@stefan-van-essen.nl
 
-ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 RUN apk --update add ca-certificates
-RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.3" >> /etc/apk/repositories
+RUN echo "https://dl.bintray.com/php-alpine/v3.9/php-7.3" >> /etc/apk/repositories
 
 RUN apk -U upgrade && apk add --no-cache \
     curl \
     nginx \
-    php7-fpm@php \
+    php-fpm \
     tzdata \
     && ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm \
     && addgroup -S php \

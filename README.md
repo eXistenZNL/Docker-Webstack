@@ -1,3 +1,6 @@
+> A recent update to the Codecasts packages means you must change the way you install PHP packages.
+> You must no longer add @php and use php-* instead of php7-* for the PHP packages  you want to install.
+
 # Docker Webstack
 
 [![Docker Build Status](https://img.shields.io/travis/eXistenZNL/Docker-Webstack.svg?style=flat-square)](https://travis-ci.org/eXistenZNL/Docker-Webstack) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE)
@@ -58,7 +61,7 @@ By making use of the codecasts repo, we can get the latest and greatest PHP vers
 
 However, this works both ways: while Codecasts has the latest PHP versions, they only support the two latest minor PHP versions, so at some point you will need to switch from the codecasts container to the vanilla container.
 
-> Please note that when using the codecasts containers, add `@php` to the end of the PHP package names that you want to install, so they are pulled from the Codecasts repo.
+> Please note that when using the Codecasts containers, use php-* instead of php7-* for the PHP packages you want to install.
 
 ### Overriding or extending the configuration
 
