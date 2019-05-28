@@ -1,9 +1,8 @@
-> A recent update to the Codecasts packages means you must change the way you install PHP packages.
-> You must no longer add @php and use php-* instead of php7-* for the PHP packages  you want to install.
-
 # Docker Webstack
 
 [![Docker Build Status](https://img.shields.io/travis/eXistenZNL/Docker-Webstack.svg?style=flat-square)](https://travis-ci.org/eXistenZNL/Docker-Webstack) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE)
+
+> A recent update to the Codecasts packages means you must change the way you install PHP packages. You must no longer add @php and use php-* instead of php7-* for the PHP packages  you want to install.
 
 ## About
 This container is a fairly simple Nginx / PHP-FPM container that can be used as a base for your own web containers. It makes use of [s6-overlay](https://github.com/just-containers/s6-overlay) as it's init daemon / process supervisor, and comes in three flavours: PHP 5.6, PHP 7.0 and PHP 7.1. It is rebuilt and tested every day on Travis-CI, so you will always have the latest security patches of Nginx and PHP on hand.
