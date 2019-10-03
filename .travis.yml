@@ -4,6 +4,7 @@ matrix:
     - env: TAG=7.0
     - env: TAG=7.1
     - env: TAG=7.2
+    - env: TAG=7.3
     - env: TAG=7.2-codecasts
     - env: TAG=7.3-codecasts
 
