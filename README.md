@@ -5,9 +5,11 @@
 > A recent update to the Codecasts packages means you must change the way you install PHP packages. You must no longer add @php and use php-* instead of php7-* for the PHP packages  you want to install.
 
 ## About
+
 This container is a fairly simple Nginx / PHP-FPM container that can be used as a base for your own web containers. It makes use of [s6-overlay](https://github.com/just-containers/s6-overlay) as it's init daemon / process supervisor, and comes in three flavours: PHP 5.6, PHP 7.0 and PHP 7.1. It is rebuilt and tested every day on Travis-CI, so you will always have the latest security patches of Nginx and PHP on hand.
 
 ## Why?
+
 I can hear you thinking "aren't there already plenty good Nginx / PHP containers out there?".
 To me, there weren't, as I found that all existing containers either run some kind of bash script to start both Nginx and PHP, or use [supervisord](http://supervisord.org/) to start one or more processes in the background.
 The former felt really hacky to me, and the latter is not meant to be used as an init daemon as [it does not handle the different signals for process 1 properly](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/) and makes your container possibly end up with zombie processes.
@@ -29,12 +31,13 @@ You can create your own containers based upon this container with a simple FROM 
 Before start hacking away, you should know this:
 - Nginx runs under the system's nginx user, and PHP-FPM runs under the system's php user.
 - The code should be copied into /www, as this is the default directory Nginx and PHP work with in this container.
-- Any PHP modules needed in your project should be installed by using apk, Alpine Linux's package manager and the package names for installing can be looked up [here](https://pkgs.alpinelinux.org).
+- Any PHP modules needed in your project should be installed by using apk, Alpine Linux's package manager and the package names for installing can be looked up in the version table below.
 
 Then there are some tips or rather guidelines that I adhere to personally, but ultimately this is just a matter of taste:
 - [S6-overlay can set permissions when the container starts up](https://github.com/just-containers/s6-overlay#fixing-ownership--permissions), but this can be slow if a lot of permissions need to be set, so just do this when building the container.
 
 ### Basic example
+
 Now that we know all that, we can do something like this:
 ```
 FROM existenz/webstack:7.0
@@ -61,6 +64,18 @@ By making use of the codecasts repo, we can get the latest and greatest PHP vers
 However, this works both ways: while Codecasts has the latest PHP versions, they only support the two latest minor PHP versions, so at some point you will need to switch from the codecasts container to the vanilla container.
 
 > Please note that when using the Codecasts containers, use php-* instead of php7-* for the PHP packages you want to install.
+
+See the table below to see what version are currently available:
+
+| Image tag     | Based on          | PHP Packages from                                                                 |
+|---------------|-------------------|-----------------------------------------------------------------------------------|
+| 5.6           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php5*&branch=v3.5) |
+| 7.0           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.5) |
+| 7.1           | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7) |
+| 7.2           | Alpine Linux 3.8  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8) |
+| 7.2-codecasts | Alpine Linux 3.8  | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.8/php-7.2/x86_64/)          |
+| 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)|
+| 7.3-codecasts | Alpine Linux 3.9  | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.9/php-7.3/x86_64/)          |
 
 ### Overriding or extending the configuration
 
