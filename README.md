@@ -76,6 +76,7 @@ See the table below to see what version are currently available:
 | 7.2-codecasts | Alpine Linux 3.8  | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.8/php-7.2/x86_64/)          |
 | 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)|
 | 7.3-codecasts | Alpine Linux 3.9  | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.9/php-7.3/x86_64/)          |
+| 7.4-codecasts | Alpine Linux 3.10 | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.10/php-7.4/x86_64/)         |
 
 ### Overriding or extending the configuration
 
