@@ -14,6 +14,9 @@ RUN apk -U upgrade && apk add --no-cache \
 
 COPY files/s6-overlay files/general files/php7 /
 
+# Enable options supported by this version of PHP-FPM
+RUN sed '/decorate_workers_output/s/^; //g' /etc/php7/php-fpm.conf
+
 WORKDIR /www
 
 ENTRYPOINT ["/init"]
