@@ -2,11 +2,9 @@
 
 [![Docker Build Status](https://img.shields.io/travis/eXistenZNL/Docker-Webstack.svg?style=flat-square)](https://travis-ci.org/eXistenZNL/Docker-Webstack) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE)
 
-> A recent update to the Codecasts packages means you must change the way you install PHP packages. You must no longer add @php and use php-* instead of php7-* for the PHP packages  you want to install.
-
 ## About
 
-This container is a fairly simple Nginx / PHP-FPM container that can be used as a base for your own web containers. It makes use of [s6-overlay](https://github.com/just-containers/s6-overlay) as it's init daemon / process supervisor, and comes in three flavours: PHP 5.6, PHP 7.0 and PHP 7.1. It is rebuilt and tested every day on Travis-CI, so you will always have the latest security patches of Nginx and PHP on hand.
+This container is a fairly simple Nginx / PHP-FPM container that can be used as a base for your own web containers. It makes use of [s6-overlay](https://github.com/just-containers/s6-overlay) as it's init daemon / process supervisor, and comes in various PHP versions (see below). It is rebuilt and tested every day on Travis-CI, so you will always have the latest security patches of Nginx and PHP on hand.
 
 ## Why?
 
@@ -40,12 +38,11 @@ Then there are some tips or rather guidelines that I adhere to personally, but u
 
 Now that we know all that, we can do something like this:
 ```
-FROM existenz/webstack:7.0
+FROM existenz/webstack:7.3
 
-COPY src/ /www
+COPY --chown=php:nginx src/ /www
 
-RUN chown -R php:nginx /www \
-    && find /www -type d -exec chmod -R 555 {} \; \
+RUN find /www -type d -exec chmod -R 555 {} \; \
     && find /www -type f -exec chmod -R 444 {} \; \
     && find /www/var -type d -exec chmod -R 755 {} \; \
     && find /www/var -type f -exec chmod -R 644 {} \; \
@@ -73,9 +70,7 @@ See the table below to see what version are currently available:
 | 7.0           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.5) |
 | 7.1           | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7) |
 | 7.2           | Alpine Linux 3.8  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8) |
-| 7.2-codecasts | Alpine Linux 3.8  | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.8/php-7.2/x86_64/)          |
 | 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)|
-| 7.3-codecasts | Alpine Linux 3.9  | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.9/php-7.3/x86_64/)          |
 | 7.4-codecasts | Alpine Linux 3.10 | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.10/php-7.4/x86_64/)         |
 
 ### Overriding or extending the configuration
