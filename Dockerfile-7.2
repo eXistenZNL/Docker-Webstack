@@ -1,6 +1,6 @@
 FROM alpine:3.8
 
-MAINTAINER docker@stefan-van-essen.nl
+LABEL maintainer="docker@stefan-van-essen.nl"
 
 RUN apk -U upgrade && apk add --no-cache \
     curl \
