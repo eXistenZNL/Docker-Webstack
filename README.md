@@ -61,6 +61,7 @@ By making use of the codecasts repo, we can get the latest and greatest PHP vers
 However, this works both ways: while Codecasts has the latest PHP versions, they only support the two latest minor PHP versions, so at some point you will need to switch from the codecasts container to the vanilla container.
 
 > Please note that when using the Codecasts containers, use php-* instead of php7-* for the PHP packages you want to install.
+> Also, check with `apk policy <package-name>` if you run into situations where PHP is still installed from the Alpine repo.
 
 See the table below to see what version are currently available:
 
