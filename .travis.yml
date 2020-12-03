@@ -17,7 +17,7 @@ cache:
 
 script:
   - make build TAG=$(printenv TAG)
-  - make run TAG=$(printenv TAG)
+  - make start TAG=$(printenv TAG)
   - sleep 15 # Wait for the docker health check to complete
   - make test TAG=$(printenv TAG)
 
