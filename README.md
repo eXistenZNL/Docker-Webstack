@@ -55,10 +55,10 @@ And you should now have a working container that runs your PHP project!
 
 ### Versions
 
-The webstack comes in various versions, both with PHP from the Alpine repo and [the Codecasts repo](https://github.com/codecasts/php-alpine).
-By making use of the codecasts repo, we can get the latest and greatest PHP versions before they are added to the Alpine repo.
+The webstack comes in various versions, both with PHP from the Alpine repos and [the Codecasts repos](https://github.com/codecasts/php-alpine).
+By making use of the codecasts repos, we can get the latest and greatest PHP versions before they are added to the Alpine repos.
 
-However, this works both ways: while Codecasts has the latest PHP versions, they only support the two latest minor PHP versions, so at some point you will need to switch from the codecasts container to the vanilla container.
+However, this works both ways: while Codecasts has the latest PHP versions, their support is limited, so at some point you will need to switch from the codecasts container to the vanilla container.
 
 > Please note that when using the Codecasts containers, use php-* instead of php7-* for the PHP packages you want to install.
 > Also, check with `apk policy <package-name>` if you run into situations where PHP is still installed from the Alpine repo.
@@ -72,7 +72,8 @@ See the table below to see what version are currently available:
 | 7.1           | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7) |
 | 7.2           | Alpine Linux 3.8  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8) |
 | 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)|
-| 7.4-codecasts | Alpine Linux 3.10 | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.10/php-7.4/x86_64/)         |
+| 7.4-codecasts | Alpine Linux 3.12 | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.12/php-7.4/x86_64/)         |
+| 8.0-codecasts | Alpine Linux 3.12 | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.12/php-8.0/x86_64/)         |
 
 ### Overriding or extending the configuration
 
@@ -88,6 +89,8 @@ These are the files to add or overwrite in order to configure the different part
 | PHP-FPM (5.6)             | /etc/php5/php-fpm.d/           | /etc/php5/php-fpm.conf        |
 | PHP core directives (7.x) | /etc/php7/conf.d/              | /etc/php7/php.ini             |
 | PHP-FPM (7.x)             | /etc/php7/php-fpm.d/           | /etc/php7/php-fpm.conf        |
+| PHP core directives (8.x) | /etc/php8/conf.d/              | /etc/php8/php.ini             |
+| PHP-FPM (8.x)             | /etc/php8/php-fpm.d/           | /etc/php8/php-fpm.conf        |
 | Nginx                     | /etc/nginx/conf.d/             | /etc/nginx/nginx.conf         |
 
 ## Bugs, questions, and improvements
