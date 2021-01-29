@@ -1,0 +1,32 @@
+name: Build containers
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        tag: ["5.6", "7.0", "7.1", "7.2", "7.3", "7.4-codecasts", "8.0-codecasts"]
+    steps:
+      - name: Checkout the codebase
+        uses: actions/checkout@v2
+      - name: Build the container
+        run: make build TAG=$(printenv TAG)
+        env:
+          TAG: ${{ matrix.tag }}
+      - name: Start the container
+        run: make start TAG=$(printenv TAG) && sleep 10
+        env:
+          TAG: ${{ matrix.tag }}
+      - name: Test the container
+        run: make test TAG=$(printenv TAG)
+        env:
+          TAG: ${{ matrix.tag }}
+      - name: Login to Docker Hub
+        if: github.repository_owner == 'eXistenZNL' && github.ref == 'refs/heads/master'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Push the container to Docker Hub
+        if: github.repository_owner == 'eXistenZNL' && github.ref == 'refs/heads/master'
+        run: docker push existenz/webstack

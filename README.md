@@ -1,6 +1,6 @@
 # Docker Webstack
 
-[![Docker Build Status](https://img.shields.io/travis/eXistenZNL/Docker-Webstack.svg?style=flat-square)](https://travis-ci.org/eXistenZNL/Docker-Webstack) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/github/workflow/status/eXistenZNL/Docker-Webstack/build-containers?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/actions) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE)
 
 ## About
 
