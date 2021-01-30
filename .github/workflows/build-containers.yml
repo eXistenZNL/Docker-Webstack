@@ -1,5 +1,10 @@
 name: Build containers
-on: push
+
+on:
+  push:
+  schedule:
+    - cron: '0 1 * * *'
+
 jobs:
   build:
     runs-on: ubuntu-20.04
