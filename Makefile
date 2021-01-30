@@ -1,5 +1,4 @@
 # Variables
-PWD := $(dir $(MAKEPATH))
 S6TAG=v1.22.1.0
 PROJECTNAME=existenz/webstack
 TAG=UNDEF
