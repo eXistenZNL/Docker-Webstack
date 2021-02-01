@@ -73,8 +73,8 @@ See the table below to see what version are currently available:
 | 7.2           | Alpine Linux 3.8  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8) |
 | 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)|
 | 7.4           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13)|
-| 8.0           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13)|
 | 7.4-codecasts | Alpine Linux 3.12 | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.12/php-7.4/x86_64/)         |
+| 8.0           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13)|
 | 8.0-codecasts | Alpine Linux 3.12 | [Codecasts repo](https://dl.bintray.com/php-alpine/v3.12/php-8.0/x86_64/)         |
 
 ### Overriding or extending the configuration
