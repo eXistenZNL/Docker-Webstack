@@ -33,5 +33,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Push the container to Docker Hub
+        env:
+          TAG: ${{ matrix.tag }}
         if: github.repository_owner == 'eXistenZNL' && github.ref == 'refs/heads/master'
-        run: docker push existenz/webstack
+        run: docker push existenz/webstack:$(printenv TAG)
