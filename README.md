@@ -64,7 +64,7 @@ See the table below to see what version are currently available:
 | 5.6           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php5*&branch=v3.5) |
 | 7.0           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.5) |
 | 7.1           | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7) |
-| 7.2           | Alpine Linux 3.8  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8) |
+| 7.2           | Alpine Linux 3.9  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8) |
 | 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)|
 | 7.4           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13)|
 | 8.0           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13)|
