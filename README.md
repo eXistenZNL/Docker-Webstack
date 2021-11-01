@@ -29,6 +29,7 @@ You can create your own containers based upon this container with a simple FROM 
 Before start hacking away, you should know this:
 - Nginx runs under the system's nginx user, and PHP-FPM runs under the system's php user.
 - The code should be copied into /www, as this is the default directory Nginx and PHP work with in this container.
+- When not using a CMS or framework like Laravel/ Symfony / WordPress that brings its own public folder, copy to /www/public instead.
 - Any PHP modules needed in your project should be installed by using apk, Alpine Linux's package manager and the package names for installing can be looked up in the version table below.
 
 Then there are some tips or rather guidelines that I adhere to personally, but ultimately this is just a matter of taste:
