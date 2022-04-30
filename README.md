@@ -56,19 +56,26 @@ And you should now have a working container that runs your PHP project!
 
 ### Versions
 
-> Codecasts containers are no longer provided, see [this issue](https://github.com/codecasts/php-alpine/issues/131) for more information.
+> Tags ending with a `-description` install packages from different repositories to keep up with the latest PHP
+> versions. These are probably short lived and will be replaced with their default counterpart as soon as these PHP
+> versions make it into the default Alpine repositories. You can use them, just keep in mind you will have to switch
+> over to the default container at one point.
+>
+> Codecasts containers are no longer provided, see [this issue](https://github.com/codecasts/php-alpine/issues/131) for
+> more information.
 
 See the table below to see what version are currently available:
 
-| Image tag     | Based on          | PHP Packages from                                                                 |
-|---------------|-------------------|-----------------------------------------------------------------------------------|
-| 5.6           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php5*&branch=v3.5) |
-| 7.0           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.5) |
-| 7.1           | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7) |
-| 7.2           | Alpine Linux 3.9  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8) |
-| 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)|
-| 7.4           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13)|
-| 8.0           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13)|
+| Image tag     | Based on          | PHP Packages from                                                                       |
+|---------------|-------------------|-----------------------------------------------------------------------------------------|
+| 5.6           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php5*&branch=v3.5)       |
+| 7.0           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.5)       |
+| 7.1           | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7)       |
+| 7.2           | Alpine Linux 3.9  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8)       |
+| 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)      |
+| 7.4           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13)      |
+| 8.0           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13)      |
+| 8.1-edge      | Alpine Linux 3.15 | [Alpine Linux edge repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=edge) |
 
 ### Overriding or extending the configuration
 
@@ -86,6 +93,7 @@ These are the files to add or overwrite in order to configure the different part
 | PHP-FPM (7.x)             | /etc/php7/php-fpm.d/           | /etc/php7/php-fpm.conf        |
 | PHP core directives (8.x) | /etc/php8/conf.d/              | /etc/php8/php.ini             |
 | PHP-FPM (8.x)             | /etc/php8/php-fpm.d/           | /etc/php8/php-fpm.conf        |
+| PHP-FPM (8.1-edge)        | /etc/php81/php-fpm.d/          | /etc/php81/php-fpm.conf       |
 | Nginx                     | /etc/nginx/conf.d/             | /etc/nginx/nginx.conf         |
 
 ## Bugs, questions, and improvements

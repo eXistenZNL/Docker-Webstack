@@ -2,7 +2,7 @@
 S6TAG=v1.22.1.0
 PROJECTNAME=existenz/webstack
 TAG=UNDEF
-PHP_VERSION=$(shell echo "$(TAG)" | sed -e 's/-codecasts//')
+PHP_VERSION=$(shell echo "$(TAG)" | sed -e 's/-.*//')
 
 .PHONY: all
 all: build start test stop clean
