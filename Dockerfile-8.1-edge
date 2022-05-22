@@ -2,7 +2,7 @@ FROM alpine:3.15
 
 LABEL maintainer="docker@stefan-van-essen.nl"
 
-RUN apk -U upgrade && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+RUN apk -U upgrade && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ \
     curl \
     nginx \
     php81-fpm \
