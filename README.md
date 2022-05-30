@@ -64,18 +64,19 @@ And you should now have a working container that runs your PHP project!
 > Codecasts containers are no longer provided, see [this issue](https://github.com/codecasts/php-alpine/issues/131) for
 > more information.
 
-See the table below to see what version are currently available:
+See the table below to see what versions are currently available:
 
-| Image tag     | Based on          | PHP Packages from                                                                       |
-|---------------|-------------------|-----------------------------------------------------------------------------------------|
-| 5.6           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php5*&branch=v3.5)       |
-| 7.0           | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.5)       |
-| 7.1           | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7)       |
-| 7.2           | Alpine Linux 3.9  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8)       |
-| 7.3           | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10)      |
-| 7.4           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13)      |
-| 8.0           | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13)      |
-| 8.1-edge      | Alpine Linux 3.15 | [Alpine Linux edge repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=edge) |
+| Image tag | Based on          | PHP Packages from                                                                                   |
+|-----------|-------------------|-----------------------------------------------------------------------------------------------------|
+| 5.6       | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php5*&branch=v3.5&arch=x86_64)       |
+| 7.0       | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.5&arch=x86_64)       |
+| 7.1       | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7&arch=x86_64)       |
+| 7.2       | Alpine Linux 3.9  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8&arch=x86_64)       |
+| 7.3       | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10&arch=x86_64)      |
+| 7.4       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13&arch=x86_64)      |
+| 8.0       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13&arch=x86_64)      |
+| 8.1       | Alpine Linux 3.16 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.16&arch=x86_64)     |
+| 8.1-edge  | Alpine Linux 3.15 | [Alpine Linux edge repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=edge&arch=x86_64) |
 
 ### Overriding or extending the configuration
 
@@ -91,9 +92,10 @@ These are the files to add or overwrite in order to configure the different part
 | PHP-FPM (5.6)             | /etc/php5/php-fpm.d/           | /etc/php5/php-fpm.conf        |
 | PHP core directives (7.x) | /etc/php7/conf.d/              | /etc/php7/php.ini             |
 | PHP-FPM (7.x)             | /etc/php7/php-fpm.d/           | /etc/php7/php-fpm.conf        |
-| PHP core directives (8.x) | /etc/php8/conf.d/              | /etc/php8/php.ini             |
-| PHP-FPM (8.x)             | /etc/php8/php-fpm.d/           | /etc/php8/php-fpm.conf        |
-| PHP-FPM (8.1-edge)        | /etc/php81/php-fpm.d/          | /etc/php81/php-fpm.conf       |
+| PHP core directives (8.0) | /etc/php8/conf.d/              | /etc/php8/php.ini             |
+| PHP-FPM (8.0)             | /etc/php8/php-fpm.d/           | /etc/php8/php-fpm.conf        |
+| PHP core directives (8.1) | /etc/php81/conf.d/             | /etc/php81/php.ini            |
+| PHP-FPM (8.1)             | /etc/php81/php-fpm.d/          | /etc/php81/php-fpm.conf       |
 | Nginx                     | /etc/nginx/conf.d/             | /etc/nginx/nginx.conf         |
 
 ## Bugs, questions, and improvements
