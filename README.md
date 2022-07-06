@@ -68,15 +68,9 @@ See the table below to see what versions are currently available:
 
 | Image tag | Based on          | PHP Packages from                                                                                   |
 |-----------|-------------------|-----------------------------------------------------------------------------------------------------|
-| 5.6       | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php5*&branch=v3.5&arch=x86_64)       |
-| 7.0       | Alpine Linux 3.5  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.5&arch=x86_64)       |
-| 7.1       | Alpine Linux 3.7  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.7&arch=x86_64)       |
-| 7.2       | Alpine Linux 3.9  | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.8&arch=x86_64)       |
-| 7.3       | Alpine Linux 3.10 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.10&arch=x86_64)      |
 | 7.4       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13&arch=x86_64)      |
 | 8.0       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13&arch=x86_64)      |
 | 8.1       | Alpine Linux 3.16 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.16&arch=x86_64)     |
-| 8.1-edge  | Alpine Linux 3.15 | [Alpine Linux edge repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=edge&arch=x86_64) |
 
 ### Overriding or extending the configuration
 
