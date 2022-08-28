@@ -1,6 +1,6 @@
 # Docker Webstack
 
-[![Build Status](https://img.shields.io/github/workflow/status/eXistenZNL/Docker-Webstack/Build%20containers?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/actions) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/github/workflow/status/eXistenZNL/Docker-Webstack/Build%20containers?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/actions) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE) [![Sponsors](https://img.shields.io/github/sponsors/eXistenZNL?color=hotpink&style=flat-square)](https://github.com/sponsors/eXistenZNL)
 
 ## About
 
@@ -82,10 +82,8 @@ These are the files to add or overwrite in order to configure the different part
 
 | Application               | Copy files into this directory | Overwrite this file if needed |
 |---------------------------|--------------------------------|-------------------------------|
-| PHP core directives (5.6) | /etc/php5/conf.d/              | /etc/php5/php.ini             |
-| PHP-FPM (5.6)             | /etc/php5/php-fpm.d/           | /etc/php5/php-fpm.conf        |
-| PHP core directives (7.x) | /etc/php7/conf.d/              | /etc/php7/php.ini             |
-| PHP-FPM (7.x)             | /etc/php7/php-fpm.d/           | /etc/php7/php-fpm.conf        |
+| PHP core directives (7.4) | /etc/php7/conf.d/              | /etc/php7/php.ini             |
+| PHP-FPM (7.4)             | /etc/php7/php-fpm.d/           | /etc/php7/php-fpm.conf        |
 | PHP core directives (8.0) | /etc/php8/conf.d/              | /etc/php8/php.ini             |
 | PHP-FPM (8.0)             | /etc/php8/php-fpm.d/           | /etc/php8/php-fpm.conf        |
 | PHP core directives (8.1) | /etc/php81/conf.d/             | /etc/php81/php.ini            |
