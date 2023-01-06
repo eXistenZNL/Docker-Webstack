@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Checkout the codebase
         uses: actions/checkout@v2
-      - name: Build the container
+      - name: Build the container for testing
         run: make build TAG=$(printenv TAG)
         env:
           TAG: ${{ matrix.tag }}
@@ -34,8 +34,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Push the container to Docker Hub
+      - name: Build multi-arch and push the container to Docker Hub
         env:
           TAG: ${{ matrix.tag }}
         if: github.repository_owner == 'eXistenZNL' && github.ref == 'refs/heads/master'
-        run: docker push existenz/webstack:$(printenv TAG)
+        run: make buildx-and-push TAG=$(printenv TAG)

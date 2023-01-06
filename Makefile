@@ -7,12 +7,19 @@ PHP_VERSION=$(shell echo "$(TAG)" | sed -e 's/-.*//')
 .PHONY: all
 all: build start test stop clean
 
-build:
+files/s6-overlay/init:
+	mkdir -p files/s6-overlay
+	wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/$(S6TAG)/s6-overlay-amd64.tar.gz
+	gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C files/s6-overlay
+
+build: files/s6-overlay/init
 	if [ "$(TAG)" = "UNDEF" ]; then echo "Please provide a valid TAG" && exit 1; fi
-	test -f files/s6-overlay/init || mkdir -p files/s6-overlay
-	test -f files/s6-overlay/init || wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/$(S6TAG)/s6-overlay-amd64.tar.gz
-	test -f files/s6-overlay/init || gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C files/s6-overlay
 	docker build -t $(PROJECTNAME):$(TAG) -f Dockerfile-$(TAG) --pull .
+
+buildx-and-push:
+	docker buildx create --use
+	docker buildx build --platform=linux/amd64,linux/arm64 -f Dockerfile-$(TAG) -t $(PROJECTNAME):$(TAG) . --push
+	docker buildx stop
 
 start:
 	if [ "$(TAG)" = "UNDEF" ]; then echo "please provide a valid TAG" && exit 1; fi
