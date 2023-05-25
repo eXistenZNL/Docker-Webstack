@@ -66,12 +66,13 @@ And you should now have a working container that runs your PHP project!
 
 See the table below to see what versions are currently available:
 
-| Image tag | Based on          | PHP Packages from                                                                                   |
-|-----------|-------------------|-----------------------------------------------------------------------------------------------------|
-| 7.4       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13&arch=x86_64)      |
-| 8.0       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13&arch=x86_64)      |
-| 8.1       | Alpine Linux 3.16 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.16&arch=x86_64)     |
-| 8.2-edge  | Alpine Linux 3.17 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.16&arch=x86_64)     |
+| Image tag | Based on          | PHP Packages from                                                                               |
+|-----------|-------------------|-------------------------------------------------------------------------------------------------|
+| 7.4       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13&arch=x86_64)  |
+| 8.0       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13&arch=x86_64)  |
+| 8.1       | Alpine Linux 3.16 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.16&arch=x86_64) |
+| 8.2       | Alpine Linux 3.18 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.18&arch=x86_64) |
+| 8.2-edge  | Alpine Linux 3.17 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=edge&arch=x86_64)  |
 
 
 ### Overriding or extending the configuration
