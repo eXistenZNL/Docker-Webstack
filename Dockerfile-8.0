@@ -3,6 +3,7 @@ FROM alpine:3.13
 LABEL maintainer="docker@stefan-van-essen.nl"
 
 ARG S6TAG
+ARG TARGETPLATFORM
 
 RUN test -n "$S6TAG"
 
