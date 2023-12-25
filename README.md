@@ -91,9 +91,9 @@ These are the files to add or overwrite in order to configure the different part
 | PHP core directives (8.1) | /etc/php81/conf.d/             | /etc/php81/php.ini            |
 | PHP-FPM (8.1)             | /etc/php81/php-fpm.d/          | /etc/php81/php-fpm.conf       |
 | PHP core directives (8.2) | /etc/php82/conf.d/             | /etc/php82/php.ini            |
-| PHP-FPM (8.3)             | /etc/php83/php-fpm.d/          | /etc/php83/php-fpm.conf       |
-| PHP core directives (8.3) | /etc/php83/conf.d/             | /etc/php83/php.ini            |
 | PHP-FPM (8.2)             | /etc/php82/php-fpm.d/          | /etc/php82/php-fpm.conf       |
+| PHP core directives (8.3) | /etc/php83/conf.d/             | /etc/php83/php.ini            |
+| PHP-FPM (8.3)             | /etc/php83/php-fpm.d/          | /etc/php83/php-fpm.conf       |
 | Nginx                     | /etc/nginx/conf.d/             | /etc/nginx/nginx.conf         |
 
 ## Bugs, questions, and improvements
