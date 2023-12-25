@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        tag: ["7.4", "8.0", "8.1", "8.2"]
+        tag: ["7.4", "8.0", "8.1", "8.2", "8.3"]
     steps:
       - name: Checkout the codebase
         uses: actions/checkout@v4
