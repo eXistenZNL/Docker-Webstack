@@ -100,3 +100,9 @@ These are the files to add or overwrite in order to configure the different part
 
 If you found a bug or have a question, please open an issue on the GitHub Issue tracker.
 Improvements can be sent by a Pull Request against the master branch and are greatly appreciated!
+
+## Contributors
+
+Thanks everyone for helping out with this project!
+
+![Contributor avatars](https://contrib.rocks/image?repo=existenznl/docker-webstack)
