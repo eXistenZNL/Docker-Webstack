@@ -39,7 +39,7 @@ Then there are some tips or rather guidelines that I adhere to personally, but u
 
 Now that we know all that, we can do something like this:
 ```
-FROM existenz/webstack:7.3
+FROM existenz/webstack:8.3
 
 COPY --chown=php:nginx src/ /www
 
@@ -48,9 +48,9 @@ RUN find /www -type d -exec chmod -R 555 {} \; \
     && find /www/var -type d -exec chmod -R 755 {} \; \
     && find /www/var -type f -exec chmod -R 644 {} \; \
     && apk -U --no-cache add \
-    php7-ctype \
-    php7-json \
-    php7-mbstring
+    php83-ctype \
+    php83-json \
+    php83-mbstring
 ```
 And you should now have a working container that runs your PHP project!
 
@@ -68,8 +68,6 @@ See the table below to see what versions are currently available:
 
 | Image tag | Based on          | PHP Packages from                                                                               | S6-Overlay |
 |-----------|-------------------|-------------------------------------------------------------------------------------------------|------------|
-| 7.4       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13&arch=x86_64)  | Version 1  |
-| 8.0       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13&arch=x86_64)  | Version 1  |
 | 8.1       | Alpine Linux 3.18 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.18&arch=x86_64) | Version 1  |
 | 8.2       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.19&arch=x86_64) | Version 1  |
 | 8.3       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.19&arch=x86_64) | Version 3  |
@@ -84,10 +82,6 @@ These are the files to add or overwrite in order to configure the different part
 
 | Application               | Copy files into this directory | Overwrite this file if needed |
 |---------------------------|--------------------------------|-------------------------------|
-| PHP core directives (7.4) | /etc/php7/conf.d/              | /etc/php7/php.ini             |
-| PHP-FPM (7.4)             | /etc/php7/php-fpm.d/           | /etc/php7/php-fpm.conf        |
-| PHP core directives (8.0) | /etc/php8/conf.d/              | /etc/php8/php.ini             |
-| PHP-FPM (8.0)             | /etc/php8/php-fpm.d/           | /etc/php8/php-fpm.conf        |
 | PHP core directives (8.1) | /etc/php81/conf.d/             | /etc/php81/php.ini            |
 | PHP-FPM (8.1)             | /etc/php81/php-fpm.d/          | /etc/php81/php-fpm.conf       |
 | PHP core directives (8.2) | /etc/php82/conf.d/             | /etc/php82/php.ini            |
