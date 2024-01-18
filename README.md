@@ -70,8 +70,8 @@ See the table below to see what versions are currently available:
 |-----------|-------------------|-------------------------------------------------------------------------------------------------|------------|
 | 7.4       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php7*&branch=v3.13&arch=x86_64)  | Version 1  |
 | 8.0       | Alpine Linux 3.13 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php8*&branch=v3.13&arch=x86_64)  | Version 1  |
-| 8.1       | Alpine Linux 3.16 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.16&arch=x86_64) | Version 1  |
-| 8.2       | Alpine Linux 3.18 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.18&arch=x86_64) | Version 1  |
+| 8.1       | Alpine Linux 3.18 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.18&arch=x86_64) | Version 1  |
+| 8.2       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.19&arch=x86_64) | Version 1  |
 | 8.3       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.19&arch=x86_64) | Version 3  |
 
 ### Overriding or extending the configuration
