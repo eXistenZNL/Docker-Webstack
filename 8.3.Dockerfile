@@ -16,27 +16,31 @@ RUN apk -U upgrade && apk add --no-cache \
     && adduser -S -G php php \
     && rm -rf /var/cache/apk/* /etc/nginx/http.d/* /etc/php83/conf.d/* /etc/php83/php-fpm.d/*
 
-# Install S6 overlay
-RUN wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz; \
-    tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz; \
-    wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz; \
-    tar -C / -Jxpf /tmp/s6-overlay-symlinks-noarch.tar.xz; \
-    wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz; \
-    tar -C / -Jxpf /tmp/s6-overlay-symlinks-arch.tar.xz; \
+# Install and verify SHA256 for S6-overlay
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz.sha256 /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz.sha265 /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz /tmp
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-noarch.tar.xz.sha265 /tmp
+
+RUN set -eux; \
+    export S6_ARCH=''; \
     case "${BUILDPLATFORM}" in \
-        "linux/amd64") \
-            wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-x86_64.tar.xz; \
-            tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz; \
-            ;; \
-        "linux/arm64") \
-            wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-aarch64.tar.xz; \
-            tar -C / -Jxpf /tmp/s6-overlay-aarch64.tar.xz; \
-            ;; \
-        *) \
-          echo "Cannot build, missing valid build platform." \
-          exit 1; \
+        "linux/amd64") S6_ARCH="x86_64"; ;; \
+        "linux/arm64") S6_ARCH="aarch64"; ;; \
+        *) echo "Cannot build, missing valid build platform for S6 init system!"; exit 1; \
     esac; \
-    rm -rf /tmp/*;
+    wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.xz; \
+    wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.xz.sha256; \
+    cd /tmp;  \
+    sha256sum -c *.sha256; \
+    tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz; \
+    tar -C / -Jxpf /tmp/s6-overlay-symlinks-arch.tar.xz; \
+    tar -C / -Jxpf /tmp/s6-overlay-symlinks-noarch.tar.xz; \
+    tar -C / -Jxpf /tmp/s6-overlay-${S6_ARCH}.tar.xz; \
+    rm -rf /tmp/*; \
+    unset S6_ARCH;
 
 COPY files/general files/php83 /
 
