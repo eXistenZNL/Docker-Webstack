@@ -3,7 +3,7 @@ FROM alpine:3.19
 LABEL maintainer="docker@stefan-van-essen.nl"
 
 ARG S6_OVERLAY_VERSION=1.22.1.0
-ARG BUILDPLATFORM
+ARG TARGETPLATFORM
 
 # Install webserver packages
 RUN apk -U upgrade && apk add --no-cache \
@@ -17,7 +17,7 @@ RUN apk -U upgrade && apk add --no-cache \
     && rm -rf /var/cache/apk/* /etc/nginx/http.d/* /etc/php82/conf.d/* /etc/php82/php-fpm.d/*
 
 # Install S6 overlay
-RUN case "${BUILDPLATFORM}" in \
+RUN case "${TARGETPLATFORM}" in \
         "linux/amd64") \
             wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz && \
             gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C / \
