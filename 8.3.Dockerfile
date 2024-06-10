@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.19 as base
 
 LABEL maintainer="docker@stefan-van-essen.nl"
 
@@ -47,3 +47,19 @@ ENTRYPOINT ["/init"]
 EXPOSE 80
 
 HEALTHCHECK --interval=5s --timeout=5s CMD curl -f http://127.0.0.1/php-fpm-ping || exit 1
+
+FROM base as usermode
+
+# Update user names, config files and access rights so the container can run in user mode
+RUN apk -U add shadow \
+    && usermod -l app php \
+    && groupmod -n app php \
+    && sed -i '/^user.*/d' /etc/nginx/nginx.conf \
+    && sed -i '/^user.*/d' /etc/php83/php-fpm.conf \
+    && sed -i '/^group.*/d' /etc/php83/php-fpm.conf \
+    && chown app:app /var/lib/nginx \
+    && chown app:app /var/log/nginx \
+    && chown app:app /run/nginx \
+    && chown app:app /var/lib/nginx/tmp
+
+USER app

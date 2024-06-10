@@ -8,7 +8,7 @@ all: build start test stop clean
 
 build:
 	if [ "$(TAG)" = "UNDEF" ]; then echo "Please provide a valid TAG" && exit 1; fi
-	docker build -t $(PROJECTNAME):$(TAG) --build-arg="BUILDPLATFORM=linux/amd64" -f $(TAG).Dockerfile --pull .
+	docker build -t $(PROJECTNAME):$(TAG) $(PARAMS) --build-arg="BUILDPLATFORM=linux/amd64" -f $(TAG).Dockerfile --pull .
 
 buildx-and-push:
 	docker buildx create --use
