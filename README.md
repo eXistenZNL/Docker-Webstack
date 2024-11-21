@@ -71,6 +71,7 @@ See the table below to see what versions are currently available:
 | 8.1       | Alpine Linux 3.18 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php81*&branch=v3.18&arch=x86_64) | Version 1  |
 | 8.2       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.19&arch=x86_64) | Version 1  |
 | 8.3       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.19&arch=x86_64) | Version 3  |
+| 8.4-edge  | Alpine Linux 3.20 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=edge&arch=x86_64)  | Version 3  |
 
 ### Overriding or extending the configuration
 
@@ -88,6 +89,8 @@ These are the files to add or overwrite in order to configure the different part
 | PHP-FPM (8.2)             | /etc/php82/php-fpm.d/          | /etc/php82/php-fpm.conf       |
 | PHP core directives (8.3) | /etc/php83/conf.d/             | /etc/php83/php.ini            |
 | PHP-FPM (8.3)             | /etc/php83/php-fpm.d/          | /etc/php83/php-fpm.conf       |
+| PHP core directives (8.4) | /etc/php84/conf.d/             | /etc/php84/php.ini            |
+| PHP-FPM (8.4)             | /etc/php84/php-fpm.d/          | /etc/php84/php-fpm.conf       |
 | Nginx                     | /etc/nginx/conf.d/             | /etc/nginx/nginx.conf         |
 
 ## Bugs, questions, and improvements
