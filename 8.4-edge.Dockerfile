@@ -14,7 +14,7 @@ RUN apk -U upgrade && apk add --no-cache \
     && rm -rf /var/cache/apk/* /etc/nginx/http.d/*
 
 # Install PHP-FPM from the Alpine Edge repository
-RUN apk add -U --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ php84-fpm \
+RUN apk add -U --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ php84-fpm \
     && addgroup -S php \
     && adduser -S -G php php \
     && rm -rf /etc/php84/conf.d/* /etc/php84/php-fpm.d/*
