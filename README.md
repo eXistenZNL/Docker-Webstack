@@ -72,7 +72,6 @@ See the table below to see what versions are currently available:
 | 8.2       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.19&arch=x86_64) | Version 1  |
 | 8.3       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.19&arch=x86_64) | Version 3  |
 | 8.4       | Alpine Linux 3.21 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.21&arch=x86_64) | Version 3  |
-| 8.4-edge  | Alpine Linux 3.20 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=edge&arch=x86_64)  | Version 3  |
 
 ### Overriding or extending the configuration
 
