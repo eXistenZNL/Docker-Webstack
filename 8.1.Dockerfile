@@ -16,21 +16,22 @@ RUN apk -U upgrade && apk add --no-cache \
     && adduser -S -G php php \
     && rm -rf /var/cache/apk/* /etc/nginx/http.d/* /etc/php81/conf.d/* /etc/php81/php-fpm.d/*
 
-# Install S6 overlay
-RUN case "${BUILDPLATFORM}" in \
-        "linux/amd64") \
-            wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz && \
-            gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C / \
-            ;; \
-        "linux/arm64") \
-            wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-arm.tar.gz && \
-            gunzip -c /tmp/s6-overlay-arm.tar.gz | tar -xf - -C / \
-            ;; \
-        *) \
-          echo "Cannot build, missing valid build platform." \
-          exit 1; \
-    esac; \    esac; \
-    rm -rf /tmp/*;
+
+# Install and verify SHA256 for S6-overlay
+RUN set -eux; \
+    export S6_ARCH=''; \
+    case "${BUILDPLATFORM}" in \
+        "linux/amd64") S6_ARCH="amd64"; ;; \
+        "linux/arm64") S6_ARCH="arm"; ;; \
+        *) echo "Cannot build, missing valid build platform for S6 init system!"; exit 1; \
+    esac; \
+    wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.gz; \
+    wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.gz.sha256; \
+    cd /tmp;  \
+    sha256sum -c *.sha256; \
+    gunzip -c /tmp//tmp/s6-overlay-${S6_ARCH}.tar.xz | tar -xf - -C /; \
+    rm -rf /tmp/*; \
+    unset S6_ARCH;
 
 COPY files/general files/php81 /
 
