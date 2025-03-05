@@ -3,7 +3,7 @@ FROM alpine:3.21
 LABEL maintainer="docker@stefan-van-essen.nl"
 
 ARG S6_OVERLAY_VERSION=3.1.6.2
-ARG BUILDPLATFORM
+ARG TARGETPLATFORM
 
 # Install webserver packages
 RUN apk -U upgrade && apk add --no-cache \
@@ -23,7 +23,7 @@ RUN wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download
     tar -C / -Jxpf /tmp/s6-overlay-symlinks-noarch.tar.xz; \
     wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-symlinks-arch.tar.xz; \
     tar -C / -Jxpf /tmp/s6-overlay-symlinks-arch.tar.xz; \
-    case "${BUILDPLATFORM}" in \
+    case "${TARGETPLATFORM}" in \
         "linux/amd64") \
             wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-x86_64.tar.xz; \
             tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz; \
