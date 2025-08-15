@@ -72,6 +72,7 @@ See the table below to see what versions are currently available:
 | 8.2       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.19&arch=x86_64) | Version 1  |
 | 8.3       | Alpine Linux 3.19 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.19&arch=x86_64) | Version 3  |
 | 8.4       | Alpine Linux 3.21 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.21&arch=x86_64) | Version 3  |
+| 8.5-edge  | Alpine Linux Edge | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=edge&arch=x86_64)  | Version 3  |
 
 ### Overriding or extending the configuration
 
@@ -79,7 +80,7 @@ If you want to augment of replace the configuration of Nginx, PHP or FPM, there 
 - Place one or more configuration files in specific directories to augment the configuration
 - If that does not suit your needs, you can also simply overwrite the configuration files altogether
 
-These are the files to add or overwrite in order to configure the different parts of the webstack:
+These are the files to add or overwrite to configure the different parts of the webstack:
 
 | Application               | Copy files into this directory | Overwrite this file if needed |
 |---------------------------|--------------------------------|-------------------------------|
@@ -91,6 +92,8 @@ These are the files to add or overwrite in order to configure the different part
 | PHP-FPM (8.3)             | /etc/php83/php-fpm.d/          | /etc/php83/php-fpm.conf       |
 | PHP core directives (8.4) | /etc/php84/conf.d/             | /etc/php84/php.ini            |
 | PHP-FPM (8.4)             | /etc/php84/php-fpm.d/          | /etc/php84/php-fpm.conf       |
+| PHP core directives (8.5) | /etc/php85/conf.d/             | /etc/php85/php.ini            |
+| PHP-FPM (8.5)             | /etc/php85/php-fpm.d/          | /etc/php85/php-fpm.conf       |
 | Nginx                     | /etc/nginx/conf.d/             | /etc/nginx/nginx.conf         |
 
 ## Bugs, questions, and improvements
