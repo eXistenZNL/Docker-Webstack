@@ -13,7 +13,7 @@ RUN apk -U upgrade && apk add --no-cache \
     && rm -rf /var/cache/apk/* /etc/nginx/http.d/*
 
 # Install PHP 8.5 from Alpine Edge
-RUN apk add --no-cache -U --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+RUN apk add --no-cache -U --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
     php85-fpm \
     && ln -s /usr/sbin/php-fpm85 /usr/sbin/php-fpm \
     && addgroup -S php \
