@@ -15,7 +15,7 @@ jobs:
         tag: ["8.1", "8.2", "8.3", "8.4", "8.5-edge"]
     steps:
       - name: Checkout the codebase
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Build the container for testing
         run: make build TAG=$(printenv TAG)
         env:
