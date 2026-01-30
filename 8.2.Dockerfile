@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:3.22 AS default
 
 LABEL maintainer="docker@stefan-van-essen.nl"
 
@@ -29,7 +29,7 @@ RUN case "${TARGETPLATFORM}" in \
         *) \
           echo "Cannot build, missing valid build platform." \
           exit 1; \
-    esac; \    esac; \
+    esac; \
     rm -rf /tmp/*;
 
 COPY files/general files/php82 /

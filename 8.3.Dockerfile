@@ -1,8 +1,8 @@
-FROM alpine:3.22
+FROM alpine:3.22 AS base
 
 LABEL maintainer="docker@stefan-van-essen.nl"
 
-ARG S6_OVERLAY_VERSION=3.1.6.2
+ARG S6_OVERLAY_VERSION=3.2.2.0
 ARG TARGETPLATFORM
 
 # Install webserver packages
@@ -44,6 +44,29 @@ WORKDIR /www
 
 ENTRYPOINT ["/init"]
 
+# =========================================================
+# Default mode
+# ==========================================================
+
+FROM base AS default
+
 EXPOSE 80
 
 HEALTHCHECK --interval=5s --timeout=5s CMD curl -f http://127.0.0.1/php-fpm-ping || exit 1
+
+# =========================================================
+# Rootless mode
+# =========================================================
+
+FROM default AS rootless
+
+# Modify configurations and set permissions for rootless operation
+RUN sed -i '/^user nginx;/d' /etc/nginx/nginx.conf \
+    && sed -i 's|listen 80 default_server;|listen 8080 default_server;|' /etc/nginx/nginx.conf \
+    && sed -i '/^user = php$/d; /^group = php$/d' /etc/php83/php-fpm.conf \
+    && mkdir -p /var/run/s6 /run/nginx /var/lib/nginx/tmp \
+    && chown -R nobody:nobody /var/run/s6 /run /var/lib/nginx /var/log/nginx /www
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=5s --timeout=5s CMD curl -f http://127.0.0.1:8080/php-fpm-ping || exit 1

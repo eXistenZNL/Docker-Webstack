@@ -27,13 +27,34 @@ You can create your own containers based upon this container with a simple FROM 
 ### Before you start
 
 Before start hacking away, you should know this:
-- Nginx runs under the system's nginx user, and PHP-FPM runs under the system's php user.
-- The code should be copied into /www, as this is the default directory Nginx and PHP work with in this container.
-- When not using a CMS or framework like Laravel / Symfony / WordPress that brings its own public folder, copy to /www/public instead.
+- By default, Nginx runs under the system's nginx user, and PHP-FPM runs under the system's php user. For rootless, see below.
+- The code should be copied into `/www`, as this is the default directory Nginx and PHP work with in this container.
+- When not using a CMS or framework like Laravel / Symfony / WordPress that brings its own public folder, copy to `/www/public` instead.
 - Any PHP modules needed in your project should be installed by using apk, Alpine Linux's package manager and the package names for installing can be looked up in the version table below.
 
 Then there are some tips or rather guidelines that I adhere to personally, but ultimately this is just a matter of taste:
 - [S6-overlay can set permissions when the container starts up](https://github.com/just-containers/s6-overlay#fixing-ownership--permissions), but this can be slow if a lot of permissions need to be set, so just do this when building the container.
+
+### Rootless mode
+
+Starting from **PHP 8.3**, this container supports rootless mode for enhanced security.
+
+#### What is rootless mode?
+
+In rootless mode, both Nginx and PHP-FPM run as the same non-root user (typically `nobody`). This eliminates the need
+for root privileges inside the container, reducing the attack surface. The container is configured to:
+- Run on port 8080 instead of port 80 (non-privileged port)
+- Remove user directives from Nginx and PHP-FPM configurations
+- Set appropriate permissions for directories that need write access
+
+#### Running rootless containers
+
+When running rootless containers, you must specify a non-root user for the user id. Permissions to various folders have
+been set to the `nobody` user (id `65534`) so it's easiest to go with that. If you want to use a different user id, make
+sure to set the correct owner on certain folders when building the container. For specifics, see the rootless target
+in any Dockerfile.
+
+Also the port is no longer on port `80` because that's a privileged port. Instead, the port has been set to `8080`.
 
 ### Basic example
 
@@ -54,25 +75,36 @@ RUN find /www -type d -exec chmod -R 555 {} \; \
 ```
 And you should now have a working container that runs your PHP project!
 
+Or, when picking a rootless container:
+
+```
+FROM existenz/webstack:8.5-rootless
+
+COPY --chown=nobody:nobody src/ /www
+```
+
 ### Versions
 
-> Tags ending with a `-description` install packages from different repositories to keep up with the latest PHP
-> versions. These are probably short-lived and will be replaced with their default counterpart as soon as these PHP
-> versions make it into the default Alpine repositories. You can use them, just keep in mind you will have to switch
-> over to the default container at one point.
+> Tags ending with a `-edge` install packages from the edge repository to keep up with the latest PHP versions. These
+> are probably short-lived and will be replaced with their default counterpart as soon as these PHP versions make it
+> into the default Alpine repositories. You can use them, just keep in mind you will have to switch over to the default
+> container at one point.
 >
 > Codecasts containers are no longer provided, see [this issue](https://github.com/codecasts/php-alpine/issues/131) for
 > more information.
 
 See the table below to see what versions are currently available:
 
-| Image tag | Based on          | PHP Packages from                                                                               | S6-Overlay |
-|-----------|-------------------|-------------------------------------------------------------------------------------------------|------------|
-| 8.2       | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.22&arch=x86_64) | Version 1  |
-| 8.3       | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.22&arch=x86_64) | Version 3  |
-| 8.4       | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.22&arch=x86_64) | Version 3  |
-| 8.5       | Alpine Linux 3.23 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.23&arch=x86_64) | Version 3  |
-| 8.5-edge  | Alpine Linux Edge | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=edge&arch=x86_64)  | Version 3  |
+| Image tag    | Based on          | PHP Packages from                                                                               | S6-Overlay |
+|--------------|-------------------|-------------------------------------------------------------------------------------------------|------------|
+| 8.2          | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.22&arch=x86_64) | Version 1  |
+| 8.3          | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.22&arch=x86_64) | Version 3  |
+| 8.3-rootless | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.22&arch=x86_64) | Version 3  |
+| 8.4          | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.22&arch=x86_64) | Version 3  |
+| 8.4-rootless | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.22&arch=x86_64) | Version 3  |
+| 8.5          | Alpine Linux 3.23 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.23&arch=x86_64) | Version 3  |
+| 8.5-rootless | Alpine Linux 3.23 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.23&arch=x86_64) | Version 3  |
+| 8.5-edge     | Alpine Linux Edge | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=edge&arch=x86_64)  | Version 3  |
 
 ### Overriding or extending the configuration
 

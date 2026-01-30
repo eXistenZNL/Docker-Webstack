@@ -13,21 +13,30 @@ jobs:
     strategy:
       matrix:
         tag: ["8.2", "8.3", "8.4", "8.5", "8.5-edge"]
+        mode: ["default", "rootless"]
+        exclude:
+          - tag: "8.2"
+            mode: "rootless"
+          - tag: "8.5-edge"
+            mode: "rootless"
     steps:
       - name: Checkout the codebase
         uses: actions/checkout@v6
       - name: Build the container for testing
-        run: make build TAG=$(printenv TAG)
+        run: make build TAG=$(printenv TAG) MODE=$(printenv MODE)
         env:
           TAG: ${{ matrix.tag }}
+          MODE: ${{ matrix.mode }}
       - name: Start the container
-        run: make start TAG=$(printenv TAG) && sleep 10
+        run: make start TAG=$(printenv TAG) MODE=$(printenv MODE) && sleep 10
         env:
           TAG: ${{ matrix.tag }}
+          MODE: ${{ matrix.mode }}
       - name: Test the container
-        run: make test TAG=$(printenv TAG)
+        run: make test TAG=$(printenv TAG) MODE=$(printenv MODE)
         env:
           TAG: ${{ matrix.tag }}
+          MODE: ${{ matrix.mode }}
       - name: Login to Docker Hub
         if: github.repository_owner == 'eXistenZNL' && github.ref == 'refs/heads/main'
         uses: docker/login-action@v3
@@ -35,7 +44,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build multi-arch and push the container to Docker Hub
+        if: github.repository_owner == 'eXistenZNL' && github.ref == 'refs/heads/main'
+        run: make buildx-and-push TAG=$(printenv TAG) MODE=$(printenv MODE)
         env:
           TAG: ${{ matrix.tag }}
-        if: github.repository_owner == 'eXistenZNL' && github.ref == 'refs/heads/main'
-        run: make buildx-and-push TAG=$(printenv TAG)
+          MODE: ${{ matrix.mode }}
