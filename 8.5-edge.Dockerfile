@@ -1,8 +1,8 @@
-FROM alpine:3.22
+FROM alpine:3.22 AS default
 
 LABEL maintainer="docker@stefan-van-essen.nl"
 
-ARG S6_OVERLAY_VERSION=3.1.6.2
+ARG S6_OVERLAY_VERSION=3.2.2.0
 ARG TARGETPLATFORM
 
 # Install webserver packages
