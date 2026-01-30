@@ -42,7 +42,7 @@ RUN wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download
     esac; \
     rm -rf /tmp/*;
 
-COPY files/general files/php85 /
+COPY files/nginx files/php85 /
 
 WORKDIR /www
 
