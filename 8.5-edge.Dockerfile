@@ -18,7 +18,7 @@ RUN apk add --no-cache -U --repository=http://dl-cdn.alpinelinux.org/alpine/edge
     && ln -s /usr/sbin/php-fpm85 /usr/sbin/php-fpm \
     && addgroup -S php \
     && adduser -S -G php php \
-    && rm -rf /var/cache/apk/* /etc/nginx/http.d/*
+    && rm -rf /var/cache/apk/* /etc/nginx/http.d/* /etc/php85/conf.d/* /etc/php85/php-fpm.d/*
 
 # Install S6 overlay
 RUN wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz; \
