@@ -52,6 +52,11 @@ test:
 	docker ps | grep existenz_webstack_instance | grep -q "(healthy)"
 	docker exec -t existenz_webstack_instance php-fpm --version | grep -q "PHP $(PHP_VERSION)"
 	wget -q localhost:8080 -O- | grep -q "PHP Version $(PHP_VERSION)"
+	if [ "$(MODE)" = "rootless" ]; then \
+		wget -q localhost:8080 -O- | grep -q '<tr><td class="e">USER </td><td class="v">nobody </td></tr>'; \
+	else \
+		wget -q localhost:8080 -O- | grep -q '<tr><td class="e">USER </td><td class="v">php </td></tr>'; \
+	fi
 
 shell:
 	docker exec -ti existenz_webstack_instance /bin/sh
