@@ -21,7 +21,7 @@ jobs:
             mode: "rootless"
     steps:
       - name: Checkout the codebase
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Build the container for testing
         run: make build TAG=$(printenv TAG) MODE=$(printenv MODE)
         env:
