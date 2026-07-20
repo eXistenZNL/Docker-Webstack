@@ -1,4 +1,4 @@
-FROM alpine:3.22 AS default
+FROM alpine:3.24 AS default
 
 LABEL maintainer="docker@stefan-van-essen.nl"
 
