@@ -58,6 +58,10 @@ test:
 		wget -q localhost:8080 -O- | grep -q '<tr><td class="e">USER </td><td class="v">php </td></tr>'; \
 	fi
 
+version:
+	@echo "Alpine version: $$(docker exec existenz_webstack_instance cat /etc/alpine-release)"
+	@echo "PHP version: $$(docker exec existenz_webstack_instance php-fpm --version | head -1 | cut -d' ' -f2)"
+
 shell:
 	docker exec -ti existenz_webstack_instance /bin/sh
 
