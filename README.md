@@ -2,6 +2,15 @@
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/eXistenZNL/Docker-Webstack/build-containers.yml?branch=master&style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/actions) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE) [![Sponsors](https://img.shields.io/github/sponsors/eXistenZNL?color=hotpink&style=flat-square)](https://github.com/sponsors/eXistenZNL)
 
+> [!WARNING]
+> **Temporary mitigations for CVE-2026-109618 / CVE-2026-109619, at least for today (2026-10-21).**
+> Two critical RCE vulnerabilities in PHP's multipart/form-data handling are unpatched at the time of writing; the official PHP release is scheduled for 2026-10-21 14:00 UTC. Until the patched PHP packages land in Alpine and are shipped in these images, all images contain two temporary mitigations:
+>
+> - Nginx rejects requests with a multipart Content-Type with a 403. **This breaks file uploads.**
+> - `session.upload_progress` (the suspected attack vector) is disabled and locked in the FPM pool.
+>
+> These mitigations will be reverted as soon as the images run a patched PHP. If you cannot afford broken file uploads, pin your base image to an older digest and mitigate at your edge instead.
+
 ## About
 
 This container is a fairly simple Nginx / PHP-FPM container that can be used as a base for your own web containers. It makes use of [s6-overlay](https://github.com/just-containers/s6-overlay) as it's init daemon / process supervisor, and comes in various PHP versions (see below). It is rebuilt and tested every day on Travis-CI, so you will always have the latest security patches of Nginx and PHP on hand.
