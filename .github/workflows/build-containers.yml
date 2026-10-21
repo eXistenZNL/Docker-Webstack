@@ -32,6 +32,11 @@ jobs:
         env:
           TAG: ${{ matrix.tag }}
           MODE: ${{ matrix.mode }}
+      - name: Show the PHP version
+        run: |
+          VERSIONS=$(make version)
+          echo "$VERSIONS"
+          echo "$VERSIONS" | sed 's/^/- /' >> "$GITHUB_STEP_SUMMARY"
       - name: Test the container
         run: make test TAG=$(printenv TAG) MODE=$(printenv MODE)
         env:
