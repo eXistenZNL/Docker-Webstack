@@ -3,13 +3,10 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/eXistenZNL/Docker-Webstack/build-containers.yml?branch=master&style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/actions) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE) [![Sponsors](https://img.shields.io/github/sponsors/eXistenZNL?color=hotpink&style=flat-square)](https://github.com/sponsors/eXistenZNL)
 
 > [!WARNING]
-> **Temporary mitigations for CVE-2026-109618 / CVE-2026-109619, at least for today (2026-10-21).**
-> Two critical RCE vulnerabilities in PHP's multipart/form-data handling are unpatched at the time of writing; the official PHP release is scheduled for 2026-10-21 14:00 UTC. Until the patched PHP packages land in Alpine and are shipped in these images, all images contain two temporary mitigations:
+> **The 8.3, 8.4 and 8.5 images have moved to Alpine Linux 3.24.**
+> In light of CVE-2026-109618 and CVE-2026-109619, all images that can be moved now run on Alpine 3.24. Alpine only updates the PHP packages in its community repository until the next Alpine release, so the images on 3.22 and 3.23 had stopped receiving PHP security patches. On 3.24 they get the latest ones again. The temporary mitigations that blocked multipart requests have been removed.
 >
-> - Nginx rejects requests with a multipart Content-Type with a 403. **This breaks file uploads.**
-> - `session.upload_progress` (the suspected attack vector) is disabled and locked in the FPM pool.
->
-> These mitigations will be reverted as soon as the images run a patched PHP. If you cannot afford broken file uploads, pin your base image to an older digest and mitigate at your edge instead.
+> **8.2 stays on Alpine 3.22**, because 3.24 has no PHP 8.2 packages. We expect the fix to reach 3.22 later than the other images: older PHP versions kept receiving updates on their last Alpine branch until their end of life, but 8.2.34 has not landed in 3.22 yet either. PHP 8.2 reaches end of life on 2026-12-31, so plan your move to a newer version.
 
 ## About
 
