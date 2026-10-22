@@ -12,12 +12,10 @@ jobs:
     runs-on: ubuntu-26.04
     strategy:
       matrix:
-        tag: ["8.2", "8.3", "8.4", "8.5", "8.5-edge"]
+        tag: ["8.2", "8.3", "8.4", "8.5"]
         mode: ["default", "rootless"]
         exclude:
           - tag: "8.2"
-            mode: "rootless"
-          - tag: "8.5-edge"
             mode: "rootless"
     steps:
       - name: Checkout the codebase
