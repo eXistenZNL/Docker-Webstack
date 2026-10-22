@@ -91,11 +91,6 @@ COPY --chown=nobody:nobody src/ /www
 
 ### Versions
 
-> Tags ending with a `-edge` install packages from the edge repository to keep up with the latest PHP versions. These
-> are probably short-lived and will be replaced with their default counterpart as soon as these PHP versions make it
-> into the default Alpine repositories. You can use them, just keep in mind you will have to switch over to the default
-> container at one point.
->
 > Codecasts containers are no longer provided, see [this issue](https://github.com/codecasts/php-alpine/issues/131) for
 > more information.
 
@@ -110,7 +105,6 @@ See the table below to see what versions are currently available:
 | 8.4-rootless | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.24&arch=x86_64) | Version 3  |
 | 8.5          | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.24&arch=x86_64) | Version 3  |
 | 8.5-rootless | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.24&arch=x86_64) | Version 3  |
-| 8.5-edge     | Alpine Linux Edge | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=edge&arch=x86_64)  | Version 3  |
 
 ### Overriding or extending the configuration
 
