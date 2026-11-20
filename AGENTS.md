@@ -14,9 +14,7 @@ The container listens on host port 8080 in both modes. `make test` checks the he
 
 ## Dockerfile layout
 
-From 8.3 on, a Dockerfile has three stages: `base` installs everything, `default` adds port 80 and its health check, and `rootless` strips the user directives, moves nginx to port 8080 and hands the writable paths to `nobody`. `MODE` picks the stage with `--target`, and a rootless image is tagged `<TAG>-rootless`. A build without `--target` produces the rootless image.
-
-8.2 is older: a single `default` stage, s6-overlay v1 and no rootless variant.
+A Dockerfile has three stages: `base` installs everything, `default` adds port 80 and its health check, and `rootless` strips the user directives, moves nginx to port 8080 and hands the writable paths to `nobody`. `MODE` picks the stage with `--target`, and a rootless image is tagged `<TAG>-rootless`. A build without `--target` produces the rootless image.
 
 The configuration files come from `files/general` (nginx, shared by all versions) and `files/phpXX` (PHP-FPM pool and the s6 service). PID and temp files live in `/tmp`, so the same configuration works in both modes.
 
@@ -26,3 +24,7 @@ The configuration files come from `files/general` (nginx, shared by all versions
 - Add `files/phpXX/` with the s6 service in `etc/services.d/php-fpmXX/` and the FPM configuration in `etc/phpXX/`.
 - Add the tag to the CI matrix, to `run-tests-local.sh` and to both tables in `README.md`.
 - A version that is only in Alpine edge becomes an `-edge` tag: a stable Alpine base with only the PHP packages from edge. See `docs/adr/0001-edge-images-use-stable-base.md`.
+
+## Removing a PHP version
+
+A version is removed once no maintained stable Alpine release keeps it up to date, not only at its end of life. See `docs/adr/0002-drop-versions-alpine-stops-updating.md`.

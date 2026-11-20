@@ -27,11 +27,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tag: ["8.2", "8.3", "8.4", "8.5", "8.6-edge"]
+        tag: ["8.3", "8.4", "8.5", "8.6-edge"]
         mode: ["default", "rootless"]
-        exclude:
-          - tag: "8.2"
-            mode: "rootless"
     steps:
       - name: Checkout the codebase
         uses: actions/checkout@v7

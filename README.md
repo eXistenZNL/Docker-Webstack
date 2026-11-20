@@ -2,6 +2,10 @@
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/eXistenZNL/Docker-Webstack/build-containers.yml?branch=master&style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/actions) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE) [![Sponsors](https://img.shields.io/github/sponsors/eXistenZNL?color=hotpink&style=flat-square)](https://github.com/sponsors/eXistenZNL)
 
+> [!WARNING]
+> **The 8.2 image and its tag have been removed.**
+> Alpine 3.22, the last Alpine release that packages PHP 8.2, did not ship the critical fixes from the PHP security release of 19 November 2026 in time, which left the 8.2 image open to several critical CVEs. Now that AI finds and exploits PHP bugs faster than ever, I would rather remove an image than knowingly keep it unpatched. Move to 8.3 or newer. See [ADR 0002](docs/adr/0002-drop-versions-alpine-stops-updating.md) for the reasoning.
+
 ## About
 
 This container is a fairly simple Nginx / PHP-FPM container that can be used as a base for your own web containers. It makes use of [s6-overlay](https://github.com/just-containers/s6-overlay) as it's init daemon / process supervisor, and comes in various PHP versions (see below). It is rebuilt and tested every day on Travis-CI, so you will always have the latest security patches of Nginx and PHP on hand.
@@ -102,7 +106,6 @@ See the table below to see what versions are currently available:
 
 | Image tag         | Based on          | PHP Packages from                                                                               | S6-Overlay |
 | ----------------- | ----------------- | ----------------------------------------------------------------------------------------------- | ---------- |
-| 8.2               | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.22&arch=x86_64) | Version 1  |
 | 8.3               | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.24&arch=x86_64) | Version 3  |
 | 8.3-rootless      | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.24&arch=x86_64) | Version 3  |
 | 8.4               | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.24&arch=x86_64) | Version 3  |
@@ -123,8 +126,6 @@ These are the files to add or overwrite to configure the different parts of the 
 
 | Application               | Copy files into this directory | Overwrite this file if needed |
 | ------------------------- | ------------------------------ | ----------------------------- |
-| PHP core directives (8.2) | /etc/php82/conf.d/             | /etc/php82/php.ini            |
-| PHP-FPM (8.2)             | /etc/php82/php-fpm.d/          | /etc/php82/php-fpm.conf       |
 | PHP core directives (8.3) | /etc/php83/conf.d/             | /etc/php83/php.ini            |
 | PHP-FPM (8.3)             | /etc/php83/php-fpm.d/          | /etc/php83/php-fpm.conf       |
 | PHP core directives (8.4) | /etc/php84/conf.d/             | /etc/php84/php.ini            |

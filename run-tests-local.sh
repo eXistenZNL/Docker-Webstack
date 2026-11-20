@@ -95,9 +95,6 @@ runtest-rootless () {
     return 0
 }
 
-# PHP 8.2 - default only
-runtest-default "8.2"
-
 # PHP 8.3 - both modes
 runtest-default "8.3"
 runtest-rootless "8.3"
