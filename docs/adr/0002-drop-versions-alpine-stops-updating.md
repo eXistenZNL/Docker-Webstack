@@ -1,4 +1,4 @@
-# 2. Drop a PHP version once Alpine no longer treats it as first class
+# 2. Drop PHP versions that are no longer first class
 
 ## Status
 
