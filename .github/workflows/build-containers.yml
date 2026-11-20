@@ -5,12 +5,27 @@ on:
   pull_request:
   push:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: "0 1 * * *"
 
 jobs:
+  check:
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Checkout the codebase
+        uses: actions/checkout@v7
+      - name: Check that every image is based on a stable Alpine release
+        # See docs/adr/0001-edge-images-use-stable-base.md
+        run: |
+          if grep -HnE '^FROM ' *.Dockerfile | grep -vE '^[^:]+:[0-9]+:FROM (alpine:[0-9]+\.[0-9]+|base|default)( |$)'; then
+            echo "Base images must be alpine:<major>.<minor>. Edge images take only their PHP packages from edge."
+            exit 1
+          fi
+
   build:
+    needs: check
     runs-on: ubuntu-26.04
     strategy:
+      fail-fast: false
       matrix:
         tag: ["8.2", "8.3", "8.4", "8.5", "8.6-edge"]
         mode: ["default", "rootless"]
