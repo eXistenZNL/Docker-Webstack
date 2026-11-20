@@ -2,12 +2,6 @@
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/eXistenZNL/Docker-Webstack/build-containers.yml?branch=master&style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/actions) [![Docker Pulls](https://img.shields.io/docker/pulls/existenz/webstack.svg?style=flat-square)](https://hub.docker.com/r/existenz/webstack/) [![License](https://img.shields.io/github/license/existenznl/docker-webstack.svg?style=flat-square)](https://github.com/eXistenZNL/Docker-Webstack/blob/master/LICENSE) [![Sponsors](https://img.shields.io/github/sponsors/eXistenZNL?color=hotpink&style=flat-square)](https://github.com/sponsors/eXistenZNL)
 
-> [!WARNING]
-> **The 8.3, 8.4 and 8.5 images have moved to Alpine Linux 3.24.**
-> In light of CVE-2026-109618 and CVE-2026-109619, all images that can be moved now run on Alpine 3.24. Alpine only updates the PHP packages in its community repository until the next Alpine release, so the images on 3.22 and 3.23 had stopped receiving PHP security patches. On 3.24 they get the latest ones again. The temporary mitigations that blocked multipart requests have been removed.
->
-> **8.2 stays on Alpine 3.22**, because 3.24 has no PHP 8.2 packages. We expect the fix to reach 3.22 later than the other images: older PHP versions kept receiving updates on their last Alpine branch until their end of life, but 8.2.34 has not landed in 3.22 yet either. PHP 8.2 reaches end of life on 2026-12-31, so plan your move to a newer version.
-
 ## About
 
 This container is a fairly simple Nginx / PHP-FPM container that can be used as a base for your own web containers. It makes use of [s6-overlay](https://github.com/just-containers/s6-overlay) as it's init daemon / process supervisor, and comes in various PHP versions (see below). It is rebuilt and tested every day on Travis-CI, so you will always have the latest security patches of Nginx and PHP on hand.
@@ -33,12 +27,14 @@ You can create your own containers based upon this container with a simple FROM 
 ### Before you start
 
 Before start hacking away, you should know this:
+
 - By default, Nginx runs under the system's nginx user, and PHP-FPM runs under the system's php user. For rootless, see below.
 - The code should be copied into `/www`, as this is the default directory Nginx and PHP work with in this container.
 - When not using a CMS or framework like Laravel / Symfony / WordPress that brings its own public folder, copy to `/www/public` instead.
 - Any PHP modules needed in your project should be installed by using apk, Alpine Linux's package manager and the package names for installing can be looked up in the version table below.
 
 Then there are some tips or rather guidelines that I adhere to personally, but ultimately this is just a matter of taste:
+
 - [S6-overlay can set permissions when the container starts up](https://github.com/just-containers/s6-overlay#fixing-ownership--permissions), but this can be slow if a lot of permissions need to be set, so just do this when building the container.
 
 ### Rootless mode
@@ -49,6 +45,7 @@ Starting from **PHP 8.3**, this container supports rootless mode for enhanced se
 
 In rootless mode, both Nginx and PHP-FPM run as the same non-root user (typically `nobody`). This eliminates the need
 for root privileges inside the container, reducing the attack surface. The container is configured to:
+
 - Run on port 8080 instead of port 80 (non-privileged port)
 - Remove user directives from Nginx and PHP-FPM configurations
 - Set appropriate permissions for directories that need write access
@@ -65,6 +62,7 @@ Also the port is no longer on port `80` because that's a privileged port. Instea
 ### Basic example
 
 Now that we know all that, we can do something like this:
+
 ```
 FROM existenz/webstack:8.3
 
@@ -79,6 +77,7 @@ RUN find /www -type d -exec chmod -R 555 {} \; \
     php83-json \
     php83-mbstring
 ```
+
 And you should now have a working container that runs your PHP project!
 
 Or, when picking a rootless container:
@@ -91,39 +90,39 @@ COPY --chown=nobody:nobody src/ /www
 
 ### Versions
 
+> Tags ending with a `-edge` install packages from the edge repository to keep up with the latest PHP versions. These
+> are probably short-lived and will be replaced with their default counterpart as soon as these PHP versions make it
+> into the default Alpine repositories. You can use them, just keep in mind you will have to switch over to the default
+> container at one point.
+>
 > Codecasts containers are no longer provided, see [this issue](https://github.com/codecasts/php-alpine/issues/131) for
 > more information.
 
 See the table below to see what versions are currently available:
 
-| Image tag    | Based on          | PHP Packages from                                                                               | S6-Overlay |
-|--------------|-------------------|-------------------------------------------------------------------------------------------------|------------|
-| 8.2          | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.22&arch=x86_64) | Version 1  |
-| 8.3          | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.24&arch=x86_64) | Version 3  |
-| 8.3-rootless | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.24&arch=x86_64) | Version 3  |
-| 8.4          | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.24&arch=x86_64) | Version 3  |
-| 8.4-rootless | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.24&arch=x86_64) | Version 3  |
-| 8.5          | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.24&arch=x86_64) | Version 3  |
-| 8.5-rootless | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.24&arch=x86_64) | Version 3  |
-| 8.6-edge          | Alpine Linux edge | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php86*&branch=edge&arch=x86_64)  | Version 3  |
-| 8.6-edge-rootless | Alpine Linux edge | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php86*&branch=edge&arch=x86_64)  | Version 3  |
-
-> [!NOTE]
-> The 8.6-edge images are based on Alpine edge, because PHP 8.6 is currently only packaged in the edge
-> testing repository. The edge repository moves fast and can still change, hence the separate `-edge`
-> naming, just like the former 8.5-edge images. Once a stable Alpine release ships PHP 8.6, the images
-> will move to that release and lose the `-edge` suffix.
+| Image tag         | Based on          | PHP Packages from                                                                               | S6-Overlay |
+| ----------------- | ----------------- | ----------------------------------------------------------------------------------------------- | ---------- |
+| 8.2               | Alpine Linux 3.22 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php82*&branch=v3.22&arch=x86_64) | Version 1  |
+| 8.3               | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.24&arch=x86_64) | Version 3  |
+| 8.3-rootless      | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php83*&branch=v3.24&arch=x86_64) | Version 3  |
+| 8.4               | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.24&arch=x86_64) | Version 3  |
+| 8.4-rootless      | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.24&arch=x86_64) | Version 3  |
+| 8.5               | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.24&arch=x86_64) | Version 3  |
+| 8.5-rootless      | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.24&arch=x86_64) | Version 3  |
+| 8.6-edge          | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php86*&branch=edge&arch=x86_64)  | Version 3  |
+| 8.6-edge-rootless | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php86*&branch=edge&arch=x86_64)  | Version 3  |
 
 ### Overriding or extending the configuration
 
 If you want to augment of replace the configuration of Nginx, PHP or FPM, there are multiple options:
+
 - Place one or more configuration files in specific directories to augment the configuration
 - If that does not suit your needs, you can also simply overwrite the configuration files altogether
 
 These are the files to add or overwrite to configure the different parts of the webstack:
 
 | Application               | Copy files into this directory | Overwrite this file if needed |
-|---------------------------|--------------------------------|-------------------------------|
+| ------------------------- | ------------------------------ | ----------------------------- |
 | PHP core directives (8.2) | /etc/php82/conf.d/             | /etc/php82/php.ini            |
 | PHP-FPM (8.2)             | /etc/php82/php-fpm.d/          | /etc/php82/php-fpm.conf       |
 | PHP core directives (8.3) | /etc/php83/conf.d/             | /etc/php83/php.ini            |

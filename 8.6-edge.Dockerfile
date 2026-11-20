@@ -1,4 +1,4 @@
-FROM alpine:edge AS base
+FROM alpine:3.24 AS base
 
 LABEL maintainer="docker@stefan-van-essen.nl"
 
@@ -6,13 +6,16 @@ ARG S6_OVERLAY_VERSION=3.2.2.0
 ARG TARGETPLATFORM
 
 # Install webserver packages
-# PHP 8.6 is not in a stable Alpine release yet, so it is pulled from the edge testing repository
 RUN apk -U upgrade && apk add --no-cache \
-    --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
     curl \
     nginx \
-    php86-fpm \
     tzdata \
+    && rm -rf /var/cache/apk/* /etc/nginx/http.d/*
+
+# Install PHP 8.6 from Alpine Edge
+# PHP 8.6 is not in a stable Alpine release yet, so it is pulled from the edge testing repository
+RUN apk add --no-cache -U --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
+    php86-fpm \
     && ln -s /usr/sbin/php-fpm86 /usr/sbin/php-fpm \
     && addgroup -S php \
     && adduser -S -G php php \
