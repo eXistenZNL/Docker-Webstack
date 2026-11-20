@@ -109,3 +109,7 @@ runtest-rootless "8.4"
 # PHP 8.5 - both modes
 runtest-default "8.5"
 runtest-rootless "8.5"
+
+# PHP 8.6 edge - both modes
+runtest-default "8.6-edge"
+runtest-rootless "8.6-edge"

@@ -105,6 +105,14 @@ See the table below to see what versions are currently available:
 | 8.4-rootless | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php84*&branch=v3.24&arch=x86_64) | Version 3  |
 | 8.5          | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.24&arch=x86_64) | Version 3  |
 | 8.5-rootless | Alpine Linux 3.24 | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php85*&branch=v3.24&arch=x86_64) | Version 3  |
+| 8.6-edge          | Alpine Linux edge | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php86*&branch=edge&arch=x86_64)  | Version 3  |
+| 8.6-edge-rootless | Alpine Linux edge | [Alpine Linux repo](https://pkgs.alpinelinux.org/packages?name=php86*&branch=edge&arch=x86_64)  | Version 3  |
+
+> [!NOTE]
+> The 8.6-edge images are based on Alpine edge, because PHP 8.6 is currently only packaged in the edge
+> testing repository. The edge repository moves fast and can still change, hence the separate `-edge`
+> naming, just like the former 8.5-edge images. Once a stable Alpine release ships PHP 8.6, the images
+> will move to that release and lose the `-edge` suffix.
 
 ### Overriding or extending the configuration
 
@@ -124,6 +132,8 @@ These are the files to add or overwrite to configure the different parts of the 
 | PHP-FPM (8.4)             | /etc/php84/php-fpm.d/          | /etc/php84/php-fpm.conf       |
 | PHP core directives (8.5) | /etc/php85/conf.d/             | /etc/php85/php.ini            |
 | PHP-FPM (8.5)             | /etc/php85/php-fpm.d/          | /etc/php85/php-fpm.conf       |
+| PHP core directives (8.6) | /etc/php86/conf.d/             | /etc/php86/php.ini            |
+| PHP-FPM (8.6)             | /etc/php86/php-fpm.d/          | /etc/php86/php-fpm.conf       |
 | Nginx                     | /etc/nginx/conf.d/             | /etc/nginx/nginx.conf         |
 
 ## Bugs, questions, and improvements
