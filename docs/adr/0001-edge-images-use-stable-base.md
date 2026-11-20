@@ -1,9 +1,6 @@
----
-status: accepted
-date: 2026-11-20
----
-
 # Edge images use a stable Alpine base
+
+_Accepted on 2026-11-20_
 
 ## Context and Problem Statement
 

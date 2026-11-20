@@ -1,9 +1,6 @@
----
-status: accepted
-date: 2026-11-20
----
-
 # Drop PHP versions that are no longer first class
+
+_Accepted on 2026-11-20_
 
 ## Context and Problem Statement
 
