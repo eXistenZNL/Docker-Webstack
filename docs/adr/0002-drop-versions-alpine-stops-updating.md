@@ -14,6 +14,8 @@ Alpine updates the PHP packages of a release only while that release is the newe
 
 PHP 8.2 hit this in November 2026. Alpine 3.22 is the last release that packages it, and on 20 November 2026 it still shipped 8.2.35, without the critical fixes of the 19 November security release, six weeks before 8.2 reaches end of life.
 
+Such a version also fails silently. Scanners that rely on the Alpine secdb, such as Trivy, do not flag it, because the branch never records the fixes it is missing. An image left online would scan clean while it is vulnerable, so a warning in the README is not enough.
+
 The alternative was to keep the version alive by pulling it from `edge/testing`, where 8.2.36 was built within hours of the release, on top of the stable base from ADR 0001. That was rejected: the image then has to add `edge/testing` to `/etc/apk/repositories`, or every `apk add php82-*` in a user's Dockerfile fails, because the stable base has no PHP 8.2 packages. A version would come from edge early in its life, from stable in the middle and from edge again at the end, which nobody can keep track of.
 
 ## Decision
